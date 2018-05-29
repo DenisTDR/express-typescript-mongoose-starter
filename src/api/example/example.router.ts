@@ -1,39 +1,23 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import {Router} from 'express';
 import ExampleController from './example.controller';
+import GenericRouter from "../generic/generic.router";
 
-export class ExampleRouter {
-
-    public router: Router
+export class ExampleRouter extends GenericRouter {
 
 
     /*--------  Constructor  --------*/
-
-
     constructor() {
-
-        // 
-        // Set router
-        this.router = Router();
-        this.init();
+        super();
     }
 
-
-    /*--------  Methods  --------*/
-
-
-    /**
-     * Init all routes in this router
-     */
-    init() {
+    protected init(): void {
         this.router.get('/', ExampleController.getAll);
         this.router.post('/', ExampleController.create);
     }
-
 }
 
 // 
 // Create Router and export its configured Express.Router
-const exampleRoutes = new ExampleRouter();
-exampleRoutes.init();
+const router = new ExampleRouter().getRouter();
 
-export default exampleRoutes.router;
+export default router;

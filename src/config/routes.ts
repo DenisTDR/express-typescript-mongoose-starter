@@ -1,5 +1,7 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import ExampleRouter from '../api/example/example.router';
+import {Router, Request, Response, NextFunction} from 'express';
+import RouterFactory from "../factories/router.factory";
+import {ExampleRouter} from "../api/example/example.router";
+
 
 export default class Routes {
 
@@ -40,7 +42,7 @@ export default class Routes {
 
         // 
         // Your routes goes here
-        this.app.use('/api/examples', ExampleRouter);
+        this.app.use('/api/examples', RouterFactory.buildRouter(ExampleRouter));
 
 
         /*--------  Main routes  --------*/

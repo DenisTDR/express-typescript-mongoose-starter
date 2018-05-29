@@ -12,8 +12,8 @@ I couldn't find any complete guide to archieve this, so i've looked many tutoria
 
 ## Steps to run
 ```sh
-    npm install          <= install all the npm Dependencies
-    npm run dev          <= start the Nodemon and watch for changes.
+    npm install                <= install all the npm Dependencies
+    npm run start-dev          <= start the Nodemon and watch for changes.
 ```
 
 ## Directory Structure

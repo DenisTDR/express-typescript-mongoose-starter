@@ -1,13 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
-import Model from './example.model';
+import {Request, Response, NextFunction} from 'express';
+import {Example, IExample} from './example.model';
 
 export default class ExampleController {
 
     /**
      * Get all
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} next 
+     * @param {*} req
+     * @param {*} res
+     * @param {*} next
      */
     public static async getAll(req: Request, res: Response, next: NextFunction) {
 
@@ -15,7 +15,7 @@ export default class ExampleController {
 
             // 
             // Get data
-            let result = await Model.find().exec();
+            let result = await Example.find().exec();
 
             // 
             // Response
@@ -36,20 +36,38 @@ export default class ExampleController {
 
     /**
      * Create
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} next 
+     * @param {*} req
+     * @param {*} res
+     * @param {*} next
      */
     public static async create(req: Request, res: Response, next: NextFunction) {
 
-        // 
-        // Create model
-        let model = new Model({
-            title: 'Test title',
-            subtitle: 'test subtitle'
-        });
+        const reqModel: IExample = req.body;
+        console.log(reqModel);
+
+        if (!reqModel.title || typeof reqModel.title !== 'string') {
+            res.send({
+                status: "error",
+                message: "Property 'title' invalid or not found."
+            });
+            return;
+        }
+        if (!reqModel.subtitle || typeof reqModel.subtitle !== 'string') {
+            res.send({
+                status: "error",
+                message: "Property 'subtitle' invalid or not found."
+            });
+            return;
+        }
 
         // 
+        // Create model
+        let model = new Example({
+            title: reqModel.title,
+            subtitle: reqModel.subtitle
+        });
+
+        //
         // Save
         await model.save();
 
