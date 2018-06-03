@@ -11,7 +11,7 @@ import Routes from "./routes";
 class Express {
 
     public app: express.Express;
-    private envFile = 'src/.env';
+    private envFile = './.env';
 
 
     /*--------  Constructor  --------*/
@@ -100,7 +100,7 @@ class Express {
                 process.exit(-1);
                 return;
             }
-            console.log("connected to MongoDB");
+            console.log("Connected to MongoDB.");
         }));
     }
 
@@ -122,7 +122,7 @@ class Express {
 
         // 
         // Add logging
-        this.app.use(logger("dev"));
+        this.app.use(logger("combined"));
 
         // 
         // Add body parser
