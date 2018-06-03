@@ -1,20 +1,16 @@
-import {Schema, model, Document, Model} from 'mongoose';
+import {model, Document, Model} from 'mongoose';
+import {GenericSchema} from "../generic/generic.model";
 
 export interface IExample extends Document {
     title?: string;
     subtitle?: string;
+    created?: Date;
 }
 
-let schema: Schema = new Schema({
+let schema = new GenericSchema({
     title: String,
-    subtitle: String
+    subtitle: String,
+    created: {type: Date}
 });
 
-schema.pre("save", next => {
-    if (!this.createdAt) {
-        this.createdAt = new Date();
-    }
-    next();
-});
-
-export const Example: Model<IExample> = model<IExample>('Example', schema);
+export const Example: Model<IExample> = model('Example', schema);

@@ -1,8 +1,7 @@
-import ExampleController from "../example/example.controller";
 import {Router} from "express";
 
+export default abstract class GenericController {
 
-export default abstract class GenericRouter {
     protected router: Router;
 
     /*--------  Constructor  --------*/
@@ -10,18 +9,13 @@ export default abstract class GenericRouter {
         //
         // Set router
         this.router = Router();
-        this.init();
+        this.initRoutes();
     }
 
-
-    /*--------  Methods  --------*/
-
-    /**
-     * Init all routes in this router
-     */
-    protected abstract init(): void;
+    protected abstract initRoutes(): void;
 
     public getRouter(): Router {
         return this.router;
     }
+
 }

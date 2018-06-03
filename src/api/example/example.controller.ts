@@ -1,7 +1,13 @@
 import {Request, Response, NextFunction} from 'express';
 import {Example, IExample} from './example.model';
+import GenericController from "../generic/generic.controller";
 
-export default class ExampleController {
+export default class ExampleController extends GenericController {
+
+    protected initRoutes(): void {
+        this.router.get('/', ExampleController.getAll);
+        this.router.post('/', ExampleController.create);
+    }
 
     /**
      * Get all
