@@ -4,11 +4,10 @@
     "description": "A starter for Node JS, Express, Typescript, Mongoose aplication",
     "main": "server.js",
     "scripts": {
-        "dev": "concurrently --kill-others \"npm run watch-ts\"",
         "serve": "npm run build-ts & npm run start",
         "build-ts": "tsc -p src",
         "start": "node dist/server.js",
-        "start-dev": "ts-node-dev --respawn --type-check ./src/server.ts"
+        "dev": "ts-node-dev --respawn --type-check ./src/server.ts"
     },
     "keywords": [
         "Node",
@@ -36,7 +35,6 @@
         "@types/mongodb": "^3.0.18",
         "@types/mongoose": "^5.0.15",
         "@types/node": "^10.1.3",
-        "concurrently": "^3.5.1",
         "glob": "^7.1.2",
         "lodash": "^4.17.10",
         "ts-node-dev": "^1.0.0-pre.24",

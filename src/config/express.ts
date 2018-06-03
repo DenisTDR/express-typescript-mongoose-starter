@@ -5,6 +5,7 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
 import * as mongoose from "mongoose";
+import * as fs from "fs";
 import Routes from "./routes";
 
 class Express {
@@ -63,6 +64,12 @@ class Express {
 
 
         console.log("loading .env file: " + this.envFile);
+
+        if(!fs.existsSync(this.envFile)) {
+            console.error("Env file not found: " + this.envFile);
+            process.exit(-1);
+            return;
+        }
 
         // 
         // Set env from file
