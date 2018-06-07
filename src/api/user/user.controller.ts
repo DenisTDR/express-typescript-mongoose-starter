@@ -61,7 +61,7 @@ export default class UserController extends GenericController {
 
         res.send({
             status: "success",
-            user: {usuername: user.username}
+            user: {username: user.username}
         });
     }
 

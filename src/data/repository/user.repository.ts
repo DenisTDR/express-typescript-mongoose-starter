@@ -1,10 +1,11 @@
-import {UserModel, IUser} from "../models/user.model";
+import {UserModel} from "../models/user.model";
 import {Model} from "mongoose";
 
 import * as bcrypt from "bcryptjs";
 import moment = require("moment");
 import Auth from "../../auth/auth";
 import AuthToken from "../../auth/auth.token";
+import IUser from "../interfaces/user.interface";
 
 export default class UserRepository {
 

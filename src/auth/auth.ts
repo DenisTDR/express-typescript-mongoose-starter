@@ -6,12 +6,12 @@ import * as express from "express";
 import * as passport from "passport";
 
 import SingletonsFactory from "../patterns/factories/singletons.factory";
-import {IUser} from "../data/models/user.model";
 
 import AuthToken from "./auth.token";
 import UserController from "../api/user/user.controller";
 import ControllerFactory from "../patterns/factories/controller.factory";
 import UserRepository from "../data/repository/user.repository";
+import IUser from "../data/interfaces/user.interface";
 
 export default class Auth {
 
