@@ -15,7 +15,7 @@ export default class ExampleController extends GenericController {
      * @param {*} res
      * @param {*} next
      */
-    public static async getAll(req: Request, res: Response, next: NextFunction) {
+    private static async getAll(req: Request, res: Response, next: NextFunction) {
 
         try {
 
@@ -46,7 +46,7 @@ export default class ExampleController extends GenericController {
      * @param {*} res
      * @param {*} next
      */
-    public static async create(req: Request, res: Response, next: NextFunction) {
+    private static async create(req: Request, res: Response, next: NextFunction) {
 
         const reqModel: IExample = req.body;
         console.log(reqModel);

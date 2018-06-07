@@ -1,5 +1,5 @@
 import {Router} from "express";
-import GenericController from "../api/generic/generic.controller";
+import GenericController from "../../api/generic/generic.controller";
 
 
 export default class ControllerFactory {

@@ -1,24 +1,20 @@
-import {Router, Request, Response, NextFunction} from 'express';
-import ControllerFactory from "../factories/controller.factory";
+import {Router, Request, Response, NextFunction, Express} from 'express';
+import ControllerFactory from "../patterns/factories/controller.factory";
 import ExampleController from "../api/example/example.controller";
+import UserController from "../api/user/user.controller";
 
 
 export default class Routes {
 
-    public router: Router;
-    private app;
+    private app: Express;
 
 
     /*--------  Constructor  --------*/
 
 
-    constructor(app) {
+    constructor(app: Express) {
 
-        // 
-        // Set router
-        this.router = Router();
-
-        // 
+        //
         // Set app
         this.app = app;
 
@@ -44,13 +40,12 @@ export default class Routes {
         // Your routes goes here
         this.app.use('/api/examples', ControllerFactory.buildController(ExampleController));
 
-
         /*--------  Main routes  --------*/
 
 
         // 
         // Set main route for any other route found
-        this.setMainRoute();
+        // this.setMainRoute();
     }
 
     /**
@@ -68,6 +63,7 @@ export default class Routes {
      * Main route
      */
     private index(req: Request, res: Response, next: NextFunction) {
+
         res.json({
             message: 'Hello World!'
         });

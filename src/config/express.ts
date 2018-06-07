@@ -8,6 +8,9 @@ import * as mongoose from "mongoose";
 import * as fs from "fs";
 import Routes from "./routes";
 
+import * as expressValidator from "express-validator";
+import Auth from "../auth/auth";
+
 class Express {
 
     public app: express.Express;
@@ -46,6 +49,11 @@ class Express {
         // 
         // Routes
         this.setRoutes();
+
+
+        //
+        // Auth initialization
+        Auth.initialize(this.app);
     }
 
 
@@ -124,10 +132,15 @@ class Express {
         // Add logging
         this.app.use(logger("combined"));
 
-        // 
+        //
         // Add body parser
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
+
+        //
+        // Add express validator
+        this.app.use(expressValidator());
+
 
         // 
         // Add cookie parser
