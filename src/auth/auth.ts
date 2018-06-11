@@ -54,19 +54,6 @@ export default class Auth {
             catch (e) {
                 return done(e);
             }
-            // User.findOne({"username": payload.username}, (err, user) => {
-            //     /* istanbul ignore next: passport response */
-            //     if (err) {
-            //         return done(err);
-            //     }
-            //     /* istanbul ignore next: passport response */
-            //     if (user === null) {
-            //         return done(null, false, {message: "The user in the token was not found"});
-            //     }
-            //
-            //
-            //     return done(null, {_id: user._id, username: user.username});
-            // });
         });
     }
 
