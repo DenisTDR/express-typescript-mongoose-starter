@@ -23,29 +23,34 @@ export default class UserRepository {
         const userModel = new UserModel(user);
         userModel.username = userModel.username.trim();
 
-        const existingUser = await UserModel.findOne({username: userModel.username});
-        if (existingUser !== null) {
-            throw "Username already taken.";
+        try {
+            const existingUser = await UserModel.findOne({username: userModel.username});
+
+            if (existingUser !== null) {
+                throw "Username already taken.";
+            }
+
+
+            userModel.password = bcrypt.hashSync(userModel.password, 10);
+
+            await userModel.save();
+        } catch (e) {
+            throw "Can't register new user.";
         }
-
-
-        userModel.password = bcrypt.hashSync(userModel.password, 10);
-
-        await userModel.save();
 
         userModel.password = "";
         return userModel;
     }
 
-    public async loginAndGetInfo(checkUser: IUser): Promise<{user: IUser, token: AuthToken}> {
+    public async loginAndGetInfo(checkUser: IUser): Promise<{ user: IUser, token: AuthToken }> {
         const user = await this.getUserByUsername(checkUser.username.trim());
 
-        if(user === null) {
+        if (user === null) {
             throw "Invalid credentials.";
         }
 
         const success = await this.checkPassword(checkUser.password, user.password);
-        if(!success) {
+        if (!success) {
             throw "Invalid credentials.";
         }
 
