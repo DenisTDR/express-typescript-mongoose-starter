@@ -27,7 +27,7 @@ export default class UserRepository {
             const existingUser = await UserModel.findOne({username: userModel.username});
 
             if (existingUser !== null) {
-                throw "Username already taken.";
+                throw "username_already_taken.";
             }
 
 
@@ -46,12 +46,12 @@ export default class UserRepository {
         const user = await this.getUserByUsername(checkUser.username.trim());
 
         if (user === null) {
-            throw "Invalid credentials.";
+            throw "invalid_credentials";
         }
 
         const success = await this.checkPassword(checkUser.password, user.password);
         if (!success) {
-            throw "Invalid credentials.";
+            throw "invalid_credentials";
         }
 
         const token = Auth.genToken(user);
