@@ -14,9 +14,10 @@ export default class UserRepository {
     }
 
 
-    public async getUserByUsername(username: string): Promise<IUser> {
-        return await UserModel.findOne({username: username}).exec();
+    public async getUserByUsername(username: string, projection?: any): Promise<IUser> {
+        return await UserModel.findOne({username: username}, {_id: false, username: true, fullName: true, role: true}).exec();
     }
+
 
     public async registerUser(user: IUser): Promise<IUser> {
 
@@ -27,14 +28,17 @@ export default class UserRepository {
             const existingUser = await UserModel.findOne({username: userModel.username});
 
             if (existingUser !== null) {
-                throw "username_already_taken.";
+                throw "username_already_taken";
             }
-
 
             userModel.password = bcrypt.hashSync(userModel.password, 10);
 
             await userModel.save();
         } catch (e) {
+            if (e == "username_already_taken") {
+                throw "username_already_taken";
+            }
+            console.error(e);
             throw "Can't register new user.";
         }
 

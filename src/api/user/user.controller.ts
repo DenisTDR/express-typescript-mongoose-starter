@@ -27,7 +27,6 @@ export default class UserController extends GenericController {
             const message: string = e.message ? e.message : e;
             res.status(400).send({status: "error", message: message});
         }
-
     }
 
     private static async login(req: Request, res: Response, next: NextFunction) {
