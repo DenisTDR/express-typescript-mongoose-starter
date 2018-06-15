@@ -22,7 +22,7 @@ export default class UserController extends GenericController {
 
         try {
             const user = await userRepo.registerUser(req.body);
-            res.send({status: "success", user: user});
+            res.send({status: "success", data: user});
         } catch (e) {
             const message: string = e.message ? e.message : e;
             res.status(400).send({status: "error", message: message});
@@ -45,7 +45,7 @@ export default class UserController extends GenericController {
 
             // if (!user.confirmed) throw "User was not validated";
 
-            res.send({status: "success", message: 'cică ok', auth: auth.token});
+            res.send({status: "success", data: auth.token});
         } catch (err) {
             console.error(err);
             res.status(401).json({"message": "Invalid credentials", "errors": err});
