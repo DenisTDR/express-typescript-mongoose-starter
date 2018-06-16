@@ -13,15 +13,20 @@ export default class UserRepository {
 
     }
 
-
     public async getUserByUsername(username: string, projection?: any): Promise<IUser> {
-        return await UserModel.findOne({username: username}, {_id: false, username: true, fullName: true, role: true}).exec();
+        if (!projection) {
+            projection = {_id: false, username: true, fullName: true, role: true};
+        }
+        return await UserModel.findOne({username: username}, projection).exec();
     }
-
 
     public async registerUser(user: IUser): Promise<IUser> {
 
-        const userModel = new UserModel(user);
+        const userModel = new UserModel({
+            username: user.username,
+            fullName: user.fullName,
+            password: user.password
+        });
         userModel.username = userModel.username.trim();
 
         try {
@@ -47,7 +52,7 @@ export default class UserRepository {
     }
 
     public async loginAndGetInfo(checkUser: IUser): Promise<{ user: IUser, token: AuthToken }> {
-        const user = await this.getUserByUsername(checkUser.username.trim());
+        const user = await this.getUserByUsername(checkUser.username.trim(), {username: true, fullName: true, role: true, password: true, eth: true});
 
         if (user === null) {
             throw "invalid_credentials";
@@ -60,6 +65,7 @@ export default class UserRepository {
 
         const token = Auth.genToken(user);
 
+        user.password = "";
         return {user, token};
     }
 

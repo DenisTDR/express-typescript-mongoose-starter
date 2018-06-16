@@ -6,6 +6,7 @@ let schema = new GenericSchema({
     username: String,
     email: String,
     password: String,
+    fullName: String,
     confirmed: {type: Boolean, default: true},
     created: {type: Date}
 });

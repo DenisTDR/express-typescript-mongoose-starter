@@ -44,10 +44,10 @@ export default class UserController extends GenericController {
 
             // if (!user.confirmed) throw "User was not validated";
 
-            res.send({status: "success", data: auth.token});
+            res.send({status: "success", data: auth});
         } catch (err) {
             console.error(err);
-            res.status(401).json({"message": "Invalid credentials", "errors": err});
+            res.status(400).json({"message": "Invalid credentials", "errors": err});
         }
     }
 
