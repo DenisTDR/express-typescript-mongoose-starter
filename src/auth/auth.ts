@@ -45,7 +45,7 @@ export default class Auth {
 
             try {
                 const userRepo: UserRepository = SingletonsFactory.getUserRepository();
-                const user = await userRepo.getUserByUsername(payload.username);
+                const user = await userRepo.getUserByUsername(payload.username, {username: true});
                 if (user === null) {
                     return done(null, false, {message: "The user in the token was not found"});
                 }
